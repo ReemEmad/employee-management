@@ -1,0 +1,67 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "employeeName": "John Doe",
+      "employeeCode": "JD001",
+      "salaryStatus": "valid",
+      "salaryValue": 100,
+      "hireDate": "2024-02-28T08:00:00.000Z",
+      "jobCode": "97"
+    },
+    {
+      "id": 2,
+      "employeeName": "Jane Smith",
+      "employeeCode": "JS002",
+      "salaryStatus": "valid",
+      "salaryValue": 105,
+      "hireDate": "2024-02-28T08:00:00.000Z",
+      "jobCode": "97"
+    },
+    {
+      "id": 3,
+      "employeeName": "Alice Johnson",
+      "employeeCode": "AJ003",
+      "salaryStatus": "valid",
+      "salaryValue": 110,
+      "hireDate": "2024-02-28T08:00:00.000Z",
+      "jobCode": "97"
+    },
+    {
+      "id": 4,
+      "employeeName": "Bob Brown",
+      "employeeCode": "BB004",
+      "salaryStatus": "valid",
+      "salaryValue": 115,
+      "hireDate": "2024-02-28T08:00:00.000Z",
+      "jobCode": "97"
+    },
+    {
+      "id": 5,
+      "employeeName": "Eve Wilson",
+      "employeeCode": "EW005",
+      "salaryStatus": "valid",
+      "salaryValue": 120,
+      "hireDate": "2024-02-28T08:00:00.000Z",
+      "jobCode": "97"
+    },
+    {
+      "id": "fa6c",
+      "jobCode": "s",
+      "hireDate": "2024-03-02T03:03:57.000Z",
+      "salaryValue": 0,
+      "salaryStatus": "swe3",
+      "employeeName": "ss",
+      "employeeCode": "ss"
+    },
+    {
+      "id": "e550",
+      "jobCode": "s",
+      "hireDate": "2024-03-02T03:03:57.000Z",
+      "salaryValue": 0,
+      "salaryStatus": "swe3",
+      "employeeName": "ss",
+      "employeeCode": "ss"
+    }
+  ]
+}

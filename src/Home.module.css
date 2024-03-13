@@ -1,0 +1,8 @@
+.divider {
+    width: 10px;
+    height: 100vh;
+    background: #f9a826;
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+}
