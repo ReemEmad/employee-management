@@ -45,10 +45,8 @@ function App() {
           Component() {
             return (
               <>
-                <Container maxWidth="xl">
-                  <AppMenu />
-                  <EditEmployee />
-                </Container>
+                <AppMenu />
+                <EditEmployee />
               </>
             );
           },

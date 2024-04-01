@@ -43,19 +43,12 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
   };
 
   return (
-    <Box
-      component="form"
-      sx={{
-        "& > :not(style)": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={2}>
         <Controller
           name="employeeCode"
           control={control}
-          render={({ field }) => <TextField label="employeeCode" {...field} />}
+          render={({ field }) => <TextField label="Employee Code" {...field} />}
         />
         {errors.employeeCode && (
           <Typography variant="body1" color="error">
@@ -67,7 +60,7 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
           name="employeeName"
           control={control}
           render={({ field }) => (
-            <TextField id="standard-basic" label="employeeName" {...field} />
+            <TextField id="standard-basic" label="Employee Name" {...field} />
           )}
         />
         {errors.employeeName && <p>{errors.employeeName.message}</p>}
@@ -76,9 +69,7 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
           name="hireDate"
           control={control}
           render={({ field }) => (
-            <Picker {...field}>
-              <DatePicker label="Hire Date" onChange={field.onChange} />
-            </Picker>
+            <TextField label="Hire Date" fullWidth {...field} type="date" />
           )}
         />
         {errors.hireDate && (
@@ -90,7 +81,7 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
         <Controller
           name="salaryStatus"
           control={control}
-          render={({ field }) => <TextField label="salaryStatus" {...field} />}
+          render={({ field }) => <TextField label="Salary Status" {...field} />}
         />
         {errors.salaryStatus && (
           <Typography variant="body1" color="error">
@@ -101,7 +92,7 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
         <Controller
           name="salaryValue"
           control={control}
-          render={({ field }) => <TextField label="salary i $" {...field} />}
+          render={({ field }) => <TextField label="Salary $" {...field} />}
         />
         {errors.salaryValue && (
           <Typography variant="body1" color="error">
@@ -112,7 +103,7 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
         <Controller
           name="jobCode"
           control={control}
-          render={({ field }) => <TextField label="job code" {...field} />}
+          render={({ field }) => <TextField label="Job Code" {...field} />}
         />
         {errors.jobCode && (
           <Typography variant="body1" color="error">
@@ -120,7 +111,13 @@ const EditForm = ({ employee }: { employee: Employee | Employee[] | null }) => {
           </Typography>
         )}
       </Stack>
-      <Button type="submit" variant="contained" disabled={!isDirty}>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={!isDirty}
+        sx={{ marginTop: 2 }}
+        fullWidth
+      >
         Edit
       </Button>
     </Box>

@@ -39,7 +39,7 @@ function AppMenu() {
                   key={page.name}
                   sx={{
                     my: 2,
-                    color: pathname === page.link ? "#c19c51" : "white",
+                    color: pathname === page.link ? "#f9a826" : "white",
                     display: "block",
                   }}
                 >
