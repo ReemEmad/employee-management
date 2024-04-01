@@ -1,67 +1,83 @@
-import { TextField, Typography, Box, List } from "@mui/material";
+import { useState } from "react";
+import {
+  Typography,
+  Box,
+  List,
+  Grid,
+  DialogActions,
+  Button,
+} from "@mui/material";
 import EntryForm from "../../components/EntryForm";
-import { useEffect, useState } from "react";
 import { Employee } from "../../types";
 import EmployeeListItem from "../../components/ListItem";
 import useFetch from "../../hooks/useFetch";
-import useCreateEmployee from "../../hooks/usePost";
+import AppDialog from "../../components/ui/modal";
+import { EmployeeListSkeletons } from "../../components/ui/skeletons";
+import { Link } from "react-router-dom";
 
 export default function EmployeeEntry() {
-  const [Employees, setEmployees] = useState<Employee[]>([
-    {
-      employeeName: "hamada",
-      employeeCode: "333d",
-      salaryStatus: "valid",
-      salaryValue: 95,
-      hireDate: new Date(),
-      jobCode: "97",
-    },
-    {
-      employeeName: "rehab",
-      employeeCode: "333ssd",
-      salaryStatus: "valid",
-      salaryValue: 95,
-      hireDate: new Date(),
-      jobCode: "97",
-    },
-  ]);
-  const { data, isPending, error } = useFetch('http://localhost:3000/employees')
-  const {createEmployee} = useCreateEmployee('http://localhost:3000/employees')
-  console.log("🚀 ~ EmployeeEntry ~ data:", data)
+  const [open, setOpen] = useState(false);
+  const [currentEmployee, setCurrentEmployee] = useState<Employee>();
+  const { data, isPending } = useFetch("http://localhost:3000/employees");
 
-  useEffect(() => {
- if(data!==null){
-  console.log(data)
- }
-  }, [data]);
-
-  const handleEmployeeClick = (code: string) => {
-    console.log(`Employee with code ${code} clicked`);
-    // Do something with the employee code
+  const handleEmployeeClick = (employee: Employee) => {
+    setOpen(true);
+    setCurrentEmployee(employee);
   };
 
-  const addAnEmplpoyee = async (employee:Employee)=>{
-    const data = await createEmployee(employee)
-    console.log("🚀 ~ addAnEmplpoyee ~ data:", data)
-  }
+  const generateMaxEmployeeCode = () => {
+    if (data || !isPending) {
+      return Number(data![data!.length - 1].id) + 1;
+    }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
-      <Typography component="h4" sx={{ mx: "auto", my: "auto" }}>
-        Employee Entry Page
-      </Typography>
-      <EntryForm onSubmitForm={addAnEmplpoyee}/>
-      {isPending &&<p>HOLD UP...</p>}
-      <List>
-        {data && data.map((employee) => (
-          <EmployeeListItem
-            key={employee.employeeName}
-            name={employee.employeeName}
-            code={employee.employeeCode}
-            onEmployeeClick={handleEmployeeClick}
-          />
-        ))}
-      </List>
+      <Box>
+        <Box
+          sx={{
+            backgroundColor: "#f5f5f5",
+            padding: "2rem",
+            borderRadius: "10px",
+            marginY: "1rem",
+          }}
+        >
+          <EntryForm maxCode={generateMaxEmployeeCode()} />
+        </Box>
+        <Grid container spacing={2}>
+          {isPending && <EmployeeListSkeletons />}
+          {data &&
+            data.map((employee: Employee) => (
+              <Grid item xs={3}>
+                <span
+                  onClick={() => handleEmployeeClick(employee)}
+                  key={employee.employeeCode}
+                >
+                  <EmployeeListItem {...employee} />
+                </span>
+              </Grid>
+            ))}
+          <Grid item xs={4}></Grid>
+        </Grid>
+      </Box>
+
+      <AppDialog title="Employee" open={open} onClose={handleClose}>
+        <Typography variant="body1">
+          Name: {currentEmployee?.employeeName}
+        </Typography>
+        <Typography variant="body1">
+          Code: {currentEmployee?.employeeCode}
+        </Typography>
+        <DialogActions>
+          <Link to={`/employee-entry/edit/${currentEmployee?.id}`}>
+            <Button>Edit</Button>
+          </Link>
+        </DialogActions>
+      </AppDialog>
     </>
   );
 }
